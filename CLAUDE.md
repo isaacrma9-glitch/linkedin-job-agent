@@ -56,4 +56,4 @@ Uses the public guest endpoint `/jobs-guest/jobs/api/seeMoreJobPostings/search` 
 
 ## Schedule
 
-GitHub Actions runs **Tuesday and Thursday at 9:00 AM Costa Rica time** (UTC-6 → `0 15 * * 2,4`). After each run, `data/seen_jobs.json` is committed back to the repo to persist deduplication state across runs.
+GitHub Actions runs **Tuesday, Thursday and Sunday at 9:00 AM Costa Rica time** (UTC-6 → `0 15 * * 0,2,4`). After each run, `data/seen_jobs.json` is committed back to the repo to persist deduplication state across runs.

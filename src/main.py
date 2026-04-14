@@ -7,6 +7,8 @@ filters duplicates, and sends top 30 to Discord + Gmail.
 import logging
 import sys
 import os
+import time
+import random
 
 sys.path.insert(0, os.path.dirname(__file__))
 
@@ -26,7 +28,7 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
-MAX_JOBS_PER_RUN = 30
+MAX_JOBS_PER_RUN = 50
 
 
 def run():
@@ -41,6 +43,9 @@ def run():
         jobs = fetch_jobs(keywords, location, max_results=PROFILE["max_results"])
         logger.info(f"  Found {len(jobs)} raw results")
         all_jobs.extend(jobs)
+
+        # Polite delay between queries to avoid LinkedIn rate limiting
+        time.sleep(random.uniform(3.0, 6.0))
 
     # Deduplicate across queries
     seen_ids: set = set()

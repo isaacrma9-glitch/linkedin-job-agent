@@ -6,6 +6,7 @@ import os
 import smtplib
 import requests
 import logging
+import time
 from datetime import datetime
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
@@ -71,8 +72,10 @@ def send_discord_report(jobs: list[dict]) -> None:
         return
 
     _discord_post({"content": f":briefcase: **{len(jobs)} oferta(s) nuevas** — {now}"})
+    time.sleep(1)
     for job in jobs[:10]:
         _discord_post({"embeds": [_build_embed(job)]})
+        time.sleep(1.2)
     if len(jobs) > 10:
         _discord_post({"content": f"_... y {len(jobs) - 10} mas en el correo de Gmail._"})
 
